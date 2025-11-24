@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karthic Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: #0b0b0b;
+      color: #f1f1f1;
+    }
+    
+    /* Hide scrollbar for all browsers */
+    body::-webkit-scrollbar {
+      display: none;
+    }
+    body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: #000;
+      color: #f1f1f1;
+    }
+    .name {
+      font-size: 7rem;
+      font-weight: 900;
+      color: #fff;
+    }
+    .twist {
+      display: inline-block;
+      transform: rotate(-40deg);
+      animation: straighten 1.4s ease-out forwards;
+      color: #fff;
+    }
+    @keyframes straighten { to { transform: rotate(0); } }
+
+    .tagline {
+      margin-top: 20px;
+      font-size: 1.7rem;
+      opacity: 0.9;
+      color: #e5e5e5;
+    }
+
+    .quote {
+      margin-top: 35px;
+      font-size: 1.3rem;
+      opacity: 0.7;
+      max-width: 600px;
+      color: #ccc;
+    }
+
+    /* ABOUT */
+    .section {
+      padding: 100px 60px;
+      background: #0d0d0d;
+    }
+
+    #about {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 80px;
+    }
+
+    .photo-frame {
+      width: 380px;
+      height: 500px;
+      background: #222;
+      border-radius: 8px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .photo-inner {
+      width: 90%;
+      height: 90%;
+      margin: 5%;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+
+    .photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-text h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      max-width: 700px;
+      color: #ddd;
+    }
+
+    .bio {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 700px;
+      color: #bbb;
+      font-style: italic;
+    }
+
+    /* WORK SECTIONS */
+    .work-section-title {
+      font-size: 3.5rem;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 40px;
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      text-align: center;
+      color: #f1f1f1;
+      border: 1px solid #333;
+    }
+    .card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .work-category {
+      margin-top: 120px;
+    }
+    .work-category:first-child {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div class="name" id="hero-name"></div>
+    <div class="tagline" id="hero-tagline"></div>
+    <div class="quote" id="hero-quote"></div>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <div class="section" id="about">
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img src="https://drive.google.com/uc?export=view&id=1qJ8YSLyILOlwiz2ivl3QXg1GVo46XT5Y" alt="Karthic" id="profile-photo" />
+      </div>
+    </div>
+    <div class="about-text">
+      <h2>About</h2>
+      <p id="about-description"></p>
+      <div class="bio" id="about-bio"></div>
+    </div>
+  </div>
+
+  <!-- WORK SECTION -->
+  <div class="section" id="work"></div>
+
+  <script>
+    // ============================================
+    // CONTENT DATA - EDIT THIS SECTION TO UPDATE YOUR PORTFOLIO
+    // ============================================
+    
+    const portfolioContent = {
+      // Hero Section
+      hero: {
+        name: "KARTHIC",
+        firstLetter: "K", // The letter that animates
+        tagline: "Coder by night, leader by the day.",
+        quote: '"People who are crazy enough to change can change the world." — Steve Jobs'
+      },
+
+      // About Section
+      about: {
+        photoUrl: "https://drive.google.com/uc?export=view&id=1qJ8YSLyILOlwiz2ivl3QXg1GVo46XT5Y", // Change this to your image URL
+        description: `An executive technologist at the intersection of innovation and leadership. With a profound passion for artificial intelligence and emerging technologies, I architect solutions that transform industries and empower organizations to navigate the digital frontier. My approach combines strategic vision with hands-on technical expertise, bridging the gap between cutting-edge AI research and pragmatic business outcomes. Whether leading teams through complex transformations or coding late into the night, my mission remains constant: to harness the power of AI to create meaningful, lasting impact.`,
+        bio: `I'm Karthic — an executive technologist passionate about AI, automation, and building intelligent systems that solve real business problems. I lead with clarity, build with curiosity, and code with intent.`
+      },
+
+      // Work Categories
+      work: [
+        {
+          title: "Talks",
+          items: [
+            {
+              title: "AI in Enterprise",
+              description: "Keynote on implementing AI strategies at scale for Fortune 500 companies"
+            },
+            {
+              title: "Future of Machine Learning",
+              description: "TEDx talk exploring the convergence of ML and human creativity"
+            },
+            {
+              title: "Leadership in Tech",
+              description: "Panel discussion on building and scaling high-performance engineering teams"
+            }
+          ]
+        },
+        {
+          title: "Code",
+          items: [
+            {
+              title: "Open Source Contributions",
+              description: "Core contributor to leading AI frameworks and libraries"
+            },
+            {
+              title: "Neural Network Framework",
+              description: "Built a lightweight, production-ready deep learning framework"
+            },
+            {
+              title: "Automation Tools",
+              description: "Developed enterprise automation solutions saving thousands of hours"
+            }
+          ]
+        },
+        {
+          title: "Articles",
+          items: [
+            {
+              title: "AI Strategy Playbook",
+              description: "How modern enterprises adopt AI responsibly and effectively"
+            },
+            {
+              title: "Scaling Engineering Teams",
+              description: "Insights from leading high-growth technical organizations"
+            },
+            {
+              title: "Future of Work",
+              description: "Exploring automation, augmentation, and human-AI collaboration"
+            }
+          ]
+        },
+        {
+          title: "Competitions",
+          items: [
+            {
+              title: "Hackathon Winner",
+              description: "Built an AI-powered assistant for real-time workflow automation"
+            },
+            {
+              title: "ML Challenge",
+              description: "Ranked top 1% in predictive modeling competition"
+            },
+            {
+              title: "Innovation Sprint",
+              description: "Prototyped a computer-vision retail analytics tool"
+            }
+          ]
+        },
+        {
+          title: "Passion Projects",
+          items: [
+            {
+              title: "AI for Good",
+              description: "Building tools that support nonprofits through automation"
+            },
+            {
+              title: "Creative Coding",
+              description: "Generative art experiments blending math and design"
+            },
+            {
+              title: "Maker Projects",
+              description: "Hardware tinkering, IoT experiments, and robotics"
+            }
+          ]
+        }
+      ]
+    };
+
+    // ============================================
+    // RENDERING LOGIC - NO NEED TO EDIT BELOW
+    // ============================================
+
+    // Render Hero Section
+    function renderHero() {
+      const { hero } = portfolioContent;
+      const nameElement = document.getElementById('hero-name');
+      const firstLetter = `<span class="twist">${hero.firstLetter}</span>`;
+      const restOfName = hero.name.substring(1);
+      nameElement.innerHTML = firstLetter + restOfName;
+      
+      document.getElementById('hero-tagline').textContent = hero.tagline;
+      document.getElementById('hero-quote').textContent = hero.quote;
+    }
+
+    // Render About Section
+    function renderAbout() {
+      const { about } = portfolioContent;
+      
+      // Update the photo source
+      const photoImg = document.getElementById('profile-photo');
+      if (photoImg && about.photoUrl) {
+        photoImg.src = about.photoUrl;
+      }
+      
+      document.getElementById('about-description').textContent = about.description;
+      document.getElementById('about-bio').textContent = about.bio;
+    }
+
+    // Render Work Section
+    function renderWork() {
+      const workSection = document.getElementById('work');
+      const { work } = portfolioContent;
+
+      work.forEach((category, index) => {
+        // Create category container
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'work-category';
+        if (index === 0) categoryDiv.style.marginTop = '0';
+
+        // Create title
+        const title = document.createElement('div');
+        title.className = 'work-section-title';
+        title.textContent = category.title;
+        categoryDiv.appendChild(title);
+
+        // Create cards container
+        const cardsContainer = document.createElement('div');
+        cardsContainer.className = 'cards';
+
+        // Create cards
+        category.items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          
+          const cardTitle = document.createElement('h3');
+          cardTitle.textContent = item.title;
+          
+          const cardDesc = document.createElement('p');
+          cardDesc.textContent = item.description;
+          
+          card.appendChild(cardTitle);
+          card.appendChild(cardDesc);
+          cardsContainer.appendChild(card);
+        });
+
+        categoryDiv.appendChild(cardsContainer);
+        workSection.appendChild(categoryDiv);
+      });
+
+      // Add intersection observer for animations
+      const blocks = document.querySelectorAll('.card');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.3 });
+
+      blocks.forEach(block => observer.observe(block));
+    }
+
+    // Initialize the page
+    function init() {
+      renderHero();
+      renderAbout();
+      renderWork();
+    }
+
+    // Run on page load
+    init();
+  </script>
+</body>
+</html>
